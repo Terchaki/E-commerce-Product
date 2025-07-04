@@ -1,0 +1,56 @@
+<!-- <section>
+  <form (ngSubmit)="salvar()">
+    <label>Código: <input [(ngModel)]="produto.codigo" name="codigo" /></label>
+    <label
+      >Descrição: <input [(ngModel)]="produto.descricao" name="descricao"
+    /></label>
+    <label
+      >Departamento:
+      <select [(ngModel)]="produto.departamentoCodigo" name="departamento">
+        <option *ngFor="let d of departamentos" [value]="d.codigo">
+          {{ d.descricao }}
+        </option>
+      </select>
+    </label>
+    <label
+      >Preço: <input type="number" [(ngModel)]="produto.preco" name="preco"
+    /></label>
+    <label
+      >Status:
+      <input type="checkbox" [(ngModel)]="produto.status" name="status" /> Ativo
+    </label>
+    <button type="submit">Salvar</button>
+  </form>
+</section> -->
+
+<section>
+  <form (ngSubmit)="salvar()" [formGroup]="form">
+    <label
+      >Código: <input type="text" formControlName="codigo" name="codigo"
+    /></label>
+    <label
+      >Descrição:
+      <input type="text" formControlName="descricao" name="descricao"
+    /></label>
+    <label
+      >Departamento:
+      <select
+        type="text"
+        formControlName="departamentoCodigo"
+        name="departamentoCodigo"
+      >
+        <option *ngFor="let d of departamentos" [value]="d.codigo">
+          {{ d.descricao }}
+        </option>
+      </select>
+    </label>
+    <label
+      >Preço: <input type="number" formControlName="preco" name="preco"
+    /></label>
+    <label
+      >Status:
+      <input type="checkbox" formControlName="status" name="status" /> Ativo
+    </label>
+    <button type="submit">Salvar</button>
+  </form>
+</section>

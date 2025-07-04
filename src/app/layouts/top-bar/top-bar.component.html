@@ -1,0 +1,24 @@
+<nav>
+  <accordion [isAnimated]="true">
+    <accordion-group heading="Cadastro" class="cursor-pointer">
+      <ul>
+        <li>
+          <a
+            routerLink="/produtos"
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Produto</a
+          >
+        </li>
+        <li>
+          <a
+            routerLink="/produtos/novo"
+            [routerLinkActive]="['active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Novo Produto</a
+          >
+        </li>
+      </ul>
+    </accordion-group>
+  </accordion>
+</nav>
