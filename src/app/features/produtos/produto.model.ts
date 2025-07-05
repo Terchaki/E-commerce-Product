@@ -1,4 +1,4 @@
-export interface Produto {
+export interface IProduto {
   id?: string;
   codigo: string;
   descricao: string;
@@ -7,7 +7,7 @@ export interface Produto {
   status: boolean;
 }
 
-export interface Departamento {
+export interface IDepartamento {
   codigo: string;
   descricao: string;
 }

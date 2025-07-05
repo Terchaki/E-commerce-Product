@@ -1,3 +1,4 @@
+
 <section>
   <table>
     <thead>
@@ -25,7 +26,7 @@
         </td>
         <td>
           <a [routerLink]="['/produtos/editar', produto.id]">
-            <button>
+            <button tooltip="Editar produto" placement="top">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="14"
@@ -39,7 +40,11 @@
               </svg>
             </button>
           </a>
-          <button (click)="excluir(produto.id)">
+          <button
+            (click)="modalExcludedProduct(confirmExcluded, produto)"
+            tooltip="Excluir produto"
+            placement="top"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               height="14"
@@ -56,4 +61,19 @@
       </tr>
     </tbody>
   </table>
+  <ng-template #confirmExcluded>
+    <div class="modal-excluded">
+      <h6>
+        Deseja excluir o produto <b>"{{ product?.descricao }}"</b>?
+      </h6>
+      <div class="d-flex justify-content-around">
+        <button type="button" class="btn-confirm" (click)="confirmExclusion()">
+          Sim
+        </button>
+        <button type="button" class="btn-descartar" (click)="descart()">
+          Não
+        </button>
+      </div>
+    </div>
+  </ng-template>
 </section>

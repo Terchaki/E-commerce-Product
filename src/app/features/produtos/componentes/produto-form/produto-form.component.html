@@ -1,56 +1,125 @@
-<!-- <section>
-  <form (ngSubmit)="salvar()">
-    <label>Código: <input [(ngModel)]="produto.codigo" name="codigo" /></label>
-    <label
-      >Descrição: <input [(ngModel)]="produto.descricao" name="descricao"
-    /></label>
-    <label
-      >Departamento:
-      <select [(ngModel)]="produto.departamentoCodigo" name="departamento">
-        <option *ngFor="let d of departamentos" [value]="d.codigo">
-          {{ d.descricao }}
-        </option>
-      </select>
-    </label>
-    <label
-      >Preço: <input type="number" [(ngModel)]="produto.preco" name="preco"
-    /></label>
-    <label
-      >Status:
-      <input type="checkbox" [(ngModel)]="produto.status" name="status" /> Ativo
-    </label>
-    <button type="submit">Salvar</button>
-  </form>
-</section> -->
+<section class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <form
+          class="p-4 border rounded shadow-sm bg-light"
+          (ngSubmit)="salvar()"
+          [formGroup]="form"
+        >
+          <h5 class="text-center">
+            {{ newProduct ? "Editar produto" : "Cadastrar novo produto" }}
+          </h5>
+          <div class="separator">
+            <label class="form-label" for="codigo">Código:</label>
+            <input
+              type="text"
+              formControlName="codigo"
+              name="codigo"
+              class="form-control"
+            />
+          </div>
 
-<section>
-  <form (ngSubmit)="salvar()" [formGroup]="form">
-    <label
-      >Código: <input type="text" formControlName="codigo" name="codigo"
-    /></label>
-    <label
-      >Descrição:
-      <input type="text" formControlName="descricao" name="descricao"
-    /></label>
-    <label
-      >Departamento:
-      <select
-        type="text"
-        formControlName="departamentoCodigo"
-        name="departamentoCodigo"
-      >
-        <option *ngFor="let d of departamentos" [value]="d.codigo">
-          {{ d.descricao }}
-        </option>
-      </select>
-    </label>
-    <label
-      >Preço: <input type="number" formControlName="preco" name="preco"
-    /></label>
-    <label
-      >Status:
-      <input type="checkbox" formControlName="status" name="status" /> Ativo
-    </label>
-    <button type="submit">Salvar</button>
-  </form>
+          <div class="separator">
+            <label class="form-label" for="descricao">Descrição:</label>
+            <input
+              type="text"
+              formControlName="descricao"
+              name="descricao"
+              class="form-control"
+              placeholder="Nome do produto"
+              [ngClass]="{
+                'is-invalid': submittedForm && form.get('descricao')?.invalid
+              }"
+            />
+            @if(submittedForm && form.get('descricao')?.invalid) {
+            <div class="invalid-feedback font-size-12">
+              @if(form.get('descricao')?.errors?.['required']) {
+              <span>Campo obrigatório!</span>
+              } @if(form.get('descricao')?.errors?.['minlength']) {
+              <span>Mínimo 3 caracteres</span>}
+              @if(form.get('descricao')?.errors?.['maxlength']) {
+              <span>Máximo 50 caracteres</span>}
+            </div>
+            }
+          </div>
+
+          <div class="separator">
+            <label class="form-label" for="departamentoCodigo"
+              >Departamento:</label
+            >
+            <select
+              formControlName="departamentoCodigo"
+              name="departamentoCodigo"
+              class="form-select"
+              [ngClass]="{
+                'is-invalid':
+                  submittedForm && form.get('departamentoCodigo')?.invalid
+              }"
+            >
+              <option value="">Selecione</option>
+              @for (departamnt of departamentos; track departamnt.descricao) {
+              <option [value]="departamnt.codigo">
+                {{ departamnt.descricao }}
+              </option>
+              }
+            </select>
+            @if(submittedForm && form.get('departamentoCodigo')?.invalid) {
+            <span class="invalid-feedback font-size-12"
+              >Campo obrigatório!</span
+            >
+            }
+          </div>
+
+          <div class="separator">
+            <label class="form-label" for="preco">Preço:</label>
+            <input
+              type="number"
+              formControlName="preco"
+              name="preco"
+              class="form-control"
+              placeholder="Ex: 15"
+              [ngClass]="{
+                'is-invalid': submittedForm && form.get('preco')?.invalid
+              }"
+            />
+            @if(submittedForm && form.get('preco')?.errors?.['required']) {
+            <span class="invalid-feedback font-size-12"
+              >Campo obrigatório!</span
+            >
+            } @if(form.get('preco')?.errors?.['min']) {
+            <span class="invalid-feedback font-size-12"
+              >O preço não pode ser negativo!</span
+            >
+            }
+          </div>
+
+          <div class="separator">
+            <label class="form-label" for="status">Staus:</label>
+            <select
+              formControlName="status"
+              name="status"
+              class="form-select"
+              [ngClass]="{
+                'is-invalid': submittedForm && form.get('status')?.invalid
+              }"
+            >
+              <option value="">Selecione</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+            @if(submittedForm && form.get('status')?.invalid) {
+            <span class="invalid-feedback font-size-12"
+              >Campo obrigatório!</span
+            >
+            }
+          </div>
+
+          <button type="submit" class="btn btn-primary mt-4 w-100">
+            Salvar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>

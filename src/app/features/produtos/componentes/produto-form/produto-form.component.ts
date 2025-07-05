@@ -8,8 +8,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Produto, Departamento } from '../../produto.model';
+import { IProduto, IDepartamento } from '../../produto.model';
 import { ProdutoService } from '../../produto.service';
+// GUID
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-produto-form',
@@ -19,41 +21,11 @@ import { ProdutoService } from '../../produto.service';
   styleUrls: ['./produto-form.component.scss'],
 })
 export class ProdutoFormComponent implements OnInit {
-  // produto: Produto = {
-  //   codigo: '',
-  //   descricao: '',
-  //   departamentoCodigo: '',
-  //   preco: 0,
-  //   status: true,
-  // };
-  // departamentos: Departamento[] = [];
-
-  // constructor(
-  //   private service: ProdutoService,
-  //   private route: ActivatedRoute,
-  //   private router: Router
-  // ) {}
-
-  // ngOnInit() {
-  //   const id = this.route.snapshot.paramMap.get('id');
-  //   if (id) {
-  //     this.service.getProduto(id).subscribe((p) => (this.produto = p));
-  //   }
-  //   this.service
-  //     .getDepartamentos()
-  //     .subscribe((dep) => (this.departamentos = dep));
-  // }
-
-  // salvar() {
-  //   const obs = this.produto.id
-  //     ? this.service.atualizar(this.produto)
-  //     : this.service.criar(this.produto);
-
-  //   obs.subscribe(() => this.router.navigate(['/produtos']));
-  // }
-
   form: FormGroup;
-  departamentos: Departamento[] = [];
+  submittedForm = false;
+  produto!: IProduto;
+  departamentos: IDepartamento[] = [];
+  newProduct: string | null;
 
   constructor(
     private service: ProdutoService,
@@ -65,6 +37,7 @@ export class ProdutoFormComponent implements OnInit {
      * Inicializando form.
      */
     this.form = this.formBuilder.group(this.validatorsForm());
+    this.newProduct = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
@@ -84,14 +57,22 @@ export class ProdutoFormComponent implements OnInit {
        * Validadores do form:
        */
       codigo: [
-        {
-          value: '',
-          disabled: true,
-        },
+        '',
+        // {
+        //   value: '',
+        //   disabled: true,
+        // },
       ],
-      descricao: ['', Validators.compose([Validators.required])],
+      descricao: [
+        '',
+        Validators.compose([
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(50),
+        ]),
+      ],
       departamentoCodigo: ['', Validators.compose([Validators.required])],
-      preco: ['', Validators.compose([Validators.required])],
+      preco: ['', Validators.compose([Validators.required, Validators.min(0)])],
       status: ['', Validators.compose([Validators.required])],
     };
   }
@@ -100,23 +81,42 @@ export class ProdutoFormComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.service.getProduto(id).subscribe((p) => {
+        this.produto = p;
         this.f['codigo'].setValue(p.codigo);
         this.f['descricao'].setValue(p.descricao);
         this.f['departamentoCodigo'].setValue(p.departamentoCodigo);
         this.f['preco'].setValue(p.preco);
-        this.f['status'].setValue(p.status);
+        this.f['status'].setValue(p.status ? 'Ativo' : 'Inativo');
       });
     }
     this.service
-      .getDepartamentos()
+      .getDepartaments()
       .subscribe((dep) => (this.departamentos = dep));
   }
 
   salvar() {
-    // const obs = this.produto.id
-    //   ? this.service.atualizar(this.produto)
-    //   : this.service.criar(this.produto);
+    this.submittedForm = true;
+    if (this.form.invalid) return;
 
-    // obs.subscribe(() => this.router.navigate(['/produtos']));
+    if (this.form.invalid) {
+      return;
+    } else {
+      let envReq: IProduto = {
+        id: this.produto?.id ? this.produto?.id : uuidv4(),
+        codigo: this.f['codigo'].value,
+        descricao: this.f['descricao'].value,
+        departamentoCodigo: this.f['departamentoCodigo'].value,
+        preco: this.f['preco'].value,
+        status: this.f['status'].value === 'Ativo' ? true : false,
+      };
+
+      console.log(envReq);
+
+      const obs = this.newProduct
+        ? this.service.update(envReq)
+        : this.service.create(envReq);
+
+      obs.subscribe(() => this.router.navigate(['/produtos']));
+    }
   }
 }

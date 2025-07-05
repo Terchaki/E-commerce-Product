@@ -1,5 +1,12 @@
+// Toastr
+@use 'ngx-toastr/toastr';
+
+// Bootstrap
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background: #fefdfd;
 }
 
 // Reset Css
