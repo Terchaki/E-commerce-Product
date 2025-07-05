@@ -1,0 +1,95 @@
+<main class="page-login">
+  <section class="container-login">
+    <ul>
+      <li class="connect-facebook">
+        <a [routerLink]="['/']">
+          <picture>
+            <source
+              media="(max-width: 685px)"
+              srcset="icons/facebook-icon-small.svg"
+            />
+            <img
+              src="icons/facebook-icon.svg"
+              class="m-4"
+              alt="Login with Facebook"
+              loading="eager"
+            />
+          </picture>
+          <p>Login com o Facebook</p>
+        </a>
+      </li>
+      <li class="form-login w-100">
+        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+          <div class="text-center">
+            <img
+              src="images/logo-ecommerce.png"
+              alt="Logo E-commerce"
+              loading="lazy"
+            />
+          </div>
+          <div class="field-username">
+            <label class="label-form" for="username">Usuário</label>
+            <input
+              type="text"
+              formControlName="username"
+              name="username"
+              class="form-control"
+              placeholder="Digite seu usuário"
+              [ngClass]="{
+                'is-invalid': submittedForm && form.get('username')?.invalid
+              }"
+            />
+            @if(submittedForm && form.get('username')?.invalid) {
+            <span class="invalid-feedback font-size-12"
+              >Campo obrigatório!</span
+            >
+            }
+          </div>
+          <div class="field-password">
+            <div class="input-passaword">
+              <label class="label-form" for="password">Senha:</label>
+              <input
+                type="text"
+                formControlName="password"
+                name="password"
+                class="form-control"
+                placeholder="Digite sua senha"
+                [ngClass]="{
+                  'is-invalid': submittedForm && form.get('password')?.invalid
+                }"
+              />
+              @if(submittedForm && form.get('password')?.invalid) {
+              <span class="invalid-feedback font-size-12"
+                >Campo obrigatório!</span
+              >
+              }
+              <img
+                src="icons/eye.svg"
+                alt="Eye password"
+                loading="lazy"
+                class="eye-password"
+                (click)="showPassword()"
+                [style.bottom]="
+                  submittedForm && form.get('password')?.invalid
+                    ? '32px'
+                    : '8px'
+                "
+                [style.right]="
+                  submittedForm && form.get('password')?.invalid
+                    ? '35px'
+                    : '10px'
+                "
+              />
+            </div>
+          </div>
+          <p class="forgot-password">
+            <a [routerLink]="['/']">Esqueceu a senha?</a>
+          </p>
+          <div class="container-btn">
+            <button type="submit" class="btn-submit">Iniciar sessão</button>
+          </div>
+        </form>
+      </li>
+    </ul>
+  </section>
+</main>

@@ -96,7 +96,6 @@ export class ProdutoFormComponent implements OnInit {
 
   salvar() {
     this.submittedForm = true;
-    if (this.form.invalid) return;
 
     if (this.form.invalid) {
       return;

@@ -1,14 +1,18 @@
 import { Routes } from '@angular/router';
-import { ProdutoFormComponent } from './features/produtos/componentes/produto-form/produto-form.component';
-import { ProdutoListComponent } from './features/produtos/componentes/produto-list/produto-list.component';
 import { LayoutsComponent } from './layouts/layouts.component';
 
 export const appRoutes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
-  // { path: 'produtos', component: ProdutoListComponent },
-  // { path: 'produtos/novo', component: ProdutoFormComponent },
-  // { path: 'produtos/editar/:id', component: ProdutoFormComponent },
-
+  {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full',
+  },
+  {
+    path: 'auth',
+    title: 'Login',
+    loadComponent: () =>
+      import('./auth/login/login.component').then((c) => c.LoginComponent),
+  },
   {
     path: '',
     component: LayoutsComponent,
@@ -35,5 +39,11 @@ export const appRoutes: Routes = [
           ).then((c) => c.ProdutoFormComponent),
       },
     ],
+  },
+  /** Rota Coringa */
+  {
+    path: '**',
+    redirectTo: 'auth',
+    pathMatch: 'full',
   },
 ];
