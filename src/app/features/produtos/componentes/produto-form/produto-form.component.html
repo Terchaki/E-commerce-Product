@@ -4,7 +4,7 @@
       <div class="col-12 col-sm-10 col-md-8 col-lg-6">
         <form
           class="p-4 border rounded shadow-sm bg-light"
-          (ngSubmit)="salvar()"
+          (ngSubmit)="save()"
           [formGroup]="form"
         >
           <h5 class="text-center">
@@ -58,7 +58,7 @@
               }"
             >
               <option value="">Selecione</option>
-              @for (departamnt of departamentos; track departamnt.descricao) {
+              @for (departamnt of department; track departamnt.descricao) {
               <option [value]="departamnt.codigo">
                 {{ departamnt.descricao }}
               </option>
@@ -79,6 +79,7 @@
               name="preco"
               class="form-control"
               placeholder="Ex: 15"
+              pattern="[0-9]*[.,]?[0-9]*"
               [ngClass]="{
                 'is-invalid': submittedForm && form.get('preco')?.invalid
               }"

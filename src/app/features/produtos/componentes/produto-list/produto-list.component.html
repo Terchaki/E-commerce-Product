@@ -1,5 +1,8 @@
 <section>
   <div class="container-table">
+    @if(productsFull.length) {
+    <app-search-filter (itemsFilters)="onSearch($event)" />
+    @if(products.length) {
     <h4 class="text-center pb-3">Lista de Produtos</h4>
     <table>
       <thead>
@@ -13,8 +16,8 @@
         </tr>
       </thead>
       <tbody>
-        @for (produto of produtos | paginate: { itemsPerPage: 2, currentPage:
-        pageActual}; track produto.id) {
+        @for (produto of products | paginate: { itemsPerPage: itemsPerPage,
+        currentPage: pageActual}; track produto.id) {
         <tr>
           <td>{{ produto.codigo }}</td>
           <td>{{ produto.descricao }}</td>
@@ -66,14 +69,30 @@
       </tbody>
     </table>
     <ng-container>
-      <div class="text-end py-3" *ngIf="produtos.length > 2">
+      <div
+        class="d-flex justify-content-end py-3"
+        *ngIf="products.length > itemsPerPage"
+      >
         <pagination-controls
           (pageChange)="pageActual = $event"
           previousLabel="Anterior"
           nextLabel="Próximo"
         ></pagination-controls>
-      </div>
-    </ng-container>
+      </div> </ng-container
+    >} @else {
+    <div class="text-center">
+      <p class="text-muted bolde" style="font-weight: bold; font-size: 0.75rem">
+        Não há nemhum produto com base no filtro aplicado. Limpe e faça uma nova
+        busca!
+      </p>
+    </div>
+    } } @else {
+    <div class="text-center">
+      <p class="text-muted bolde" style="font-weight: bold; font-size: 0.75rem">
+        Não há produtos cadastrados, cadastre um novo!
+      </p>
+    </div>
+    }
   </div>
   <ng-template #confirmExcluded>
     <div class="modal-excluded">

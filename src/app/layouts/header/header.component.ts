@@ -18,6 +18,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.user = SecurityUtil.getAccount();
     this.initialName();
+    localStorage.removeItem('debug');
   }
 
   logout() {

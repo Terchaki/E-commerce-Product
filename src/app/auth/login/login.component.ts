@@ -1,6 +1,5 @@
-import { ILogin } from './../models/login.model';
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -10,13 +9,17 @@ import {
   Validators,
 } from '@angular/forms';
 
+// Interfaces
+import { ILogin } from './../models/login.model';
+
 // GUID
 import { v4 as uuidv4 } from 'uuid';
 
 // Services
-import { ToastrFeedbackService } from '../../shared/services/toastr-feedback.service';
-import { SecurityUtil } from '../../core/utils/security.util';
 import { AuthService } from '../services/auth.service';
+
+// Token
+import { SecurityUtil } from '../../core/utils/security.util';
 
 @Component({
   selector: 'app-login',
@@ -41,7 +44,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     /**
-     * Redirecionando caso já tenha o token de login.
+     * Redirecting if you already have the login token.
      */
     if (SecurityUtil.hasToken()) {
       this.authService.redirectLogin();
@@ -58,7 +61,7 @@ export class LoginComponent implements OnInit {
   }
 
   /**
-   * Controls do formulário.
+   * Controls form.
    */
   get f() {
     return this.form.controls;

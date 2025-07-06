@@ -1,0 +1,62 @@
+<form [formGroup]="form" (ngSubmit)="env()" class="p-3">
+  <div class="row">
+    <p class="label-filter">Filtro de busca:</p>
+    <div class="col-md-2 col-sm-6">
+      <label for="codigo" class="form-label mb-0">Código</label>
+      <input
+        type="text"
+        id="codigo"
+        class="form-control"
+        formControlName="codigo"
+        placeholder="Digite o código"
+      />
+    </div>
+
+    <div class="col-md-4 col-sm-6">
+      <label for="descricao" class="form-label mb-0">Descrição</label>
+      <input
+        type="text"
+        id="descricao"
+        class="form-control"
+        formControlName="descricao"
+        placeholder="Digite a descrição"
+      />
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <label for="departamento" class="form-label mb-0">Departamento</label>
+      <select
+        id="departamento"
+        class="form-select"
+        formControlName="departamento"
+      >
+        <option value="">Todos</option>
+        @for (departamnt of departamentos; track departamnt.descricao) {
+        <option [value]="departamnt.codigo">
+          {{ departamnt.descricao }}
+        </option>
+        }
+      </select>
+    </div>
+
+    <div class="col-md-3 col-sm-6">
+      <label for="status" class="form-label mb-0">Status</label>
+      <select id="status" class="form-select" formControlName="status">
+        <option value="">Todos</option>
+        <option value="true">Ativo</option>
+        <option value="false">Inativo</option>
+      </select>
+    </div>
+
+    <div class="col-12 d-flex justify-content-end pt-3">
+      <button
+        type="button"
+        class="btn btn-warning me-2"
+        (click)="clearFields()"
+      >
+        Limpar
+      </button>
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </div>
+  </div>
+</form>

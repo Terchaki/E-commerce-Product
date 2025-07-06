@@ -1,13 +1,15 @@
 import { ILogin } from '../../auth/models/login.model';
 
 export class SecurityUtil {
-  // Salvando Token de login no local storage.
+  /**
+   * Saving the login token to local storage.
+   */
   public static set(account: ILogin) {
     localStorage.setItem('Auth', btoa(JSON.stringify(account)));
   }
 
   /**
-   * Retornar token
+   * Return token
    */
   public static getToken(): string | null {
     const DATA = localStorage.getItem('Auth');
@@ -33,9 +35,6 @@ export class SecurityUtil {
     }
   }
 
-  /**
-   * Possui token?
-   */
   public static hasToken() {
     if (this.getToken()) {
       return true;
@@ -44,9 +43,10 @@ export class SecurityUtil {
     }
   }
   /**
-   * Excluir token
+   * Logout
    */
   public static clear() {
     localStorage.removeItem('Auth');
+    localStorage.removeItem('Cod-product');
   }
 }

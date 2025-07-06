@@ -8,8 +8,13 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+
+// Interfaces
 import { IProduto, IDepartamento } from '../../models/produto.model';
+
+// Componentes
 import { ProdutoService } from '../../services/produto.service';
+
 // GUID
 import { v4 as uuidv4 } from 'uuid';
 
@@ -23,45 +28,46 @@ import { v4 as uuidv4 } from 'uuid';
 export class ProdutoFormComponent implements OnInit {
   form: FormGroup;
   submittedForm = false;
-  produto!: IProduto;
-  departamentos: IDepartamento[] = [];
+  product!: IProduto;
+  department: IDepartamento[] = [];
   newProduct: string | null;
 
   constructor(
-    private service: ProdutoService,
+    private produtoService: ProdutoService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder
   ) {
-    /**
-     * Inicializando form.
-     */
     this.form = this.formBuilder.group(this.validatorsForm());
+
+    /**
+     * checking the route to see if it is a new record.
+     */
     this.newProduct = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnInit() {
-    this.getProdutos();
+    this.getProduts();
+    this.getCodProduct();
   }
 
   /**
-   * Controls do formulário.
+   * Controls form.
    */
   get f() {
     return this.form.controls;
   }
 
+  /**
+   * Init form.
+   */
   validatorsForm() {
     return {
-      /**
-       * Validadores do form:
-       */
       codigo: [
-        '',
-        // {
-        //   value: '',
-        //   disabled: true,
-        // },
+        {
+          value: '',
+          disabled: true,
+        },
       ],
       descricao: [
         '',
@@ -77,11 +83,26 @@ export class ProdutoFormComponent implements OnInit {
     };
   }
 
-  getProdutos() {
+  /**
+   * setting id in code field.
+   */
+  getCodProduct() {
+    if (localStorage.getItem('Cod-product')) {
+      const cod = Number(localStorage.getItem('Cod-product')) + 1;
+      this.f['codigo'].setValue(cod.toString());
+    } else {
+      this.f['codigo'].setValue(uuidv4());
+    }
+  }
+
+  /**
+   * filling in form fields.
+   */
+  getProduts() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.service.getProduto(id).subscribe((p) => {
-        this.produto = p;
+      this.produtoService.getProduto(id).subscribe((p) => {
+        this.product = p;
         this.f['codigo'].setValue(p.codigo);
         this.f['descricao'].setValue(p.descricao);
         this.f['departamentoCodigo'].setValue(p.departamentoCodigo);
@@ -89,19 +110,19 @@ export class ProdutoFormComponent implements OnInit {
         this.f['status'].setValue(p.status ? 'Ativo' : 'Inativo');
       });
     }
-    this.service
+    this.produtoService
       .getDepartaments()
-      .subscribe((dep) => (this.departamentos = dep));
+      .subscribe((dep) => (this.department = dep));
   }
 
-  salvar() {
+  save() {
     this.submittedForm = true;
 
     if (this.form.invalid) {
       return;
     } else {
       let envReq: IProduto = {
-        id: this.produto?.id ? this.produto?.id : uuidv4(),
+        id: this.product?.id ? this.product?.id : uuidv4(),
         codigo: this.f['codigo'].value,
         descricao: this.f['descricao'].value,
         departamentoCodigo: this.f['departamentoCodigo'].value,
@@ -109,11 +130,9 @@ export class ProdutoFormComponent implements OnInit {
         status: this.f['status'].value === 'Ativo' ? true : false,
       };
 
-      console.log(envReq);
-
       const obs = this.newProduct
-        ? this.service.update(envReq)
-        : this.service.create(envReq);
+        ? this.produtoService.update(envReq)
+        : this.produtoService.create(envReq);
 
       obs.subscribe(() => this.router.navigate(['/cadastro/produtos']));
     }
