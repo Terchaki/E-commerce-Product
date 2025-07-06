@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './core/guard/auth-guard.guard';
 import { LayoutsComponent } from './layouts/layouts.component';
 
 export const appRoutes: Routes = [
@@ -14,7 +15,7 @@ export const appRoutes: Routes = [
       import('./auth/login/login.component').then((c) => c.LoginComponent),
   },
   {
-    path: '',
+    path: 'cadastro',
     component: LayoutsComponent,
     children: [
       {
@@ -23,6 +24,8 @@ export const appRoutes: Routes = [
           import(
             './features/produtos/componentes/produto-list/produto-list.component'
           ).then((c) => c.ProdutoListComponent),
+        title: 'E-commerce - Produtos',
+        canActivate: [AuthGuard],
       },
       {
         path: 'produtos/novo',
@@ -30,6 +33,8 @@ export const appRoutes: Routes = [
           import(
             './features/produtos/componentes/produto-form/produto-form.component'
           ).then((c) => c.ProdutoFormComponent),
+        title: 'E-commerce - Novo produto',
+        canActivate: [AuthGuard],
       },
       {
         path: 'produtos/editar/:id',
@@ -37,6 +42,8 @@ export const appRoutes: Routes = [
           import(
             './features/produtos/componentes/produto-form/produto-form.component'
           ).then((c) => c.ProdutoFormComponent),
+        title: 'E-commerce - Editar produto',
+        canActivate: [AuthGuard],
       },
     ],
   },

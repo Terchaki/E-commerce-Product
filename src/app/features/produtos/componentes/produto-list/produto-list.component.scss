@@ -3,27 +3,32 @@
     display: flex;
     overflow: auto;
 
-    table {
+
+    .container-table {
       width: 100%;
       margin: 70px 30px 30px;
       border-collapse: collapse;
 
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: center;
-      }
+      table {
+        width: 100%;
 
-      th {
-        background: #eee;
-      }
+        th,
+        td {
+          border: 1px solid #ddd;
+          padding: 8px;
+          text-align: center;
+        }
 
-      .status {
-        display: block;
-        color: #FFF;
-        font-weight: 500;
-        padding: 2px;
+        th {
+          background: #eee;
+        }
+
+        .status {
+          display: block;
+          color: #FFF;
+          font-weight: 500;
+          padding: 2px;
+        }
       }
     }
 

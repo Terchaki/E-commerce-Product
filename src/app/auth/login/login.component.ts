@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ILogin } from './../models/login.model';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
@@ -9,8 +10,13 @@ import {
   Validators,
 } from '@angular/forms';
 
+// GUID
+import { v4 as uuidv4 } from 'uuid';
+
 // Services
 import { ToastrFeedbackService } from '../../shared/services/toastr-feedback.service';
+import { SecurityUtil } from '../../core/utils/security.util';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,17 +24,14 @@ import { ToastrFeedbackService } from '../../shared/services/toastr-feedback.ser
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   form: FormGroup;
   submittedForm: boolean = false;
-  usernameFocus: boolean = false;
-  passwordFocused: boolean = false;
   passwordVisible: boolean = false;
 
   constructor(
-    private route: Router,
     private formBuilder: FormBuilder,
-    private toastrFeedbackService: ToastrFeedbackService
+    private authService: AuthService
   ) {
     /**
      * Init forms.
@@ -36,6 +39,14 @@ export class LoginComponent {
     this.form = this.formBuilder.group(this.validatorsForm());
   }
 
+  ngOnInit(): void {
+    /**
+     * Redirecionando caso já tenha o token de login.
+     */
+    if (SecurityUtil.hasToken()) {
+      this.authService.redirectLogin();
+    }
+  }
   /**
    * Validators form:
    */
@@ -66,12 +77,12 @@ export class LoginComponent {
     if (this.form.invalid) {
       return;
     } else {
-      this.redirectLogin();
-      console.log('asdasdasdas')
+      let envReq: ILogin = {
+        id: uuidv4(),
+        username: this.f['username'].value,
+      };
+      SecurityUtil.set(envReq);
+      this.authService.redirectLogin();
     }
-  }
-
-  redirectLogin() {
-    this.route.navigate(['/produtos']);
   }
 }

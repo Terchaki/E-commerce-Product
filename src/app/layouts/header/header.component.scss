@@ -37,4 +37,10 @@
       }
     }
   }
+
+  @media (max-width: 400px) {
+    .display {
+      display: none;
+    }
+  }
 }

@@ -1,22 +1,22 @@
 <header>
   <ul class="container-header">
     <li>
-      <a class="cursor-pointer" [routerLink]="['/produtos']">
+      <a class="cursor-pointer" [routerLink]="['/cadastro']">
         <img src="/images/logo-ecommerce.png" loading="eager" width="100px" />
       </a>
     </li>
     <li>
       <ul class="user">
         <li>
-          <span><b>Bem vindo(a),</b></span
-          ><br />
-          <span>Lucas Henrique</span>
+          <span class="display"><b>Bem vindo(a),</b></span
+          ><br class="display" />
+          <span>{{ nameUser() }}</span>
           <span class="cursor-pointer" (click)="logout()" title="Sair"
             ><br /><b> Sair</b></span
           >
         </li>
         <li class="avatar">
-          <div class="img">{{ "LH" }}</div>
+          <div class="img">{{ initialName() }}</div>
         </li>
       </ul>
     </li>

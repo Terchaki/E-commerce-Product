@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IProduto, IDepartamento } from './produto.model';
+import { IProduto, IDepartamento } from '../models/produto.model';
 import { catchError, Observable, tap, throwError } from 'rxjs';
-import { ToastrFeedbackService } from '../../shared/services/toastr-feedback.service';
+import { ToastrFeedbackService } from '../../../shared/services/toastr-feedback.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProdutoService {

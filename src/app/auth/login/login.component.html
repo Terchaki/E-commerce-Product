@@ -24,7 +24,7 @@
             <img
               src="images/logo-ecommerce.png"
               alt="Logo E-commerce"
-              loading="lazy"
+              loading="eager"
             />
           </div>
           <div class="field-username">
@@ -34,10 +34,11 @@
               formControlName="username"
               name="username"
               class="form-control"
-              placeholder="Digite seu usuário"
+              placeholder="Digite seu nome de usuário"
               [ngClass]="{
                 'is-invalid': submittedForm && form.get('username')?.invalid
               }"
+
             />
             @if(submittedForm && form.get('username')?.invalid) {
             <span class="invalid-feedback font-size-12"
@@ -49,11 +50,12 @@
             <div class="input-passaword">
               <label class="label-form" for="password">Senha:</label>
               <input
-                type="text"
+                [type]="passwordVisible ? 'text' : 'password'"
                 formControlName="password"
                 name="password"
                 class="form-control"
                 placeholder="Digite sua senha"
+                autocomplete="off"
                 [ngClass]="{
                   'is-invalid': submittedForm && form.get('password')?.invalid
                 }"
@@ -66,7 +68,7 @@
               <img
                 src="icons/eye.svg"
                 alt="Eye password"
-                loading="lazy"
+                loading="eager"
                 class="eye-password"
                 (click)="showPassword()"
                 [style.bottom]="

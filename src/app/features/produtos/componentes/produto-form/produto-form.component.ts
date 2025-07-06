@@ -8,8 +8,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IProduto, IDepartamento } from '../../produto.model';
-import { ProdutoService } from '../../produto.service';
+import { IProduto, IDepartamento } from '../../models/produto.model';
+import { ProdutoService } from '../../services/produto.service';
 // GUID
 import { v4 as uuidv4 } from 'uuid';
 
@@ -115,7 +115,7 @@ export class ProdutoFormComponent implements OnInit {
         ? this.service.update(envReq)
         : this.service.create(envReq);
 
-      obs.subscribe(() => this.router.navigate(['/produtos']));
+      obs.subscribe(() => this.router.navigate(['/cadastro/produtos']));
     }
   }
 }

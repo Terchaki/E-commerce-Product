@@ -1,24 +1,27 @@
 import { Component, LOCALE_ID, OnInit, TemplateRef } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { IProduto } from '../../produto.model';
-import { ProdutoService } from '../../produto.service';
+import { IProduto } from '../../models/produto.model';
+import { ProdutoService } from '../../services/produto.service';
 import { Department } from '../../../../shared/enums/department.enum';
 // Ngx Bootstrap
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import localePt from '@angular/common/locales/pt';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgxPaginationModule } from 'ngx-pagination';
 registerLocaleData(localePt);
 
 @Component({
   selector: 'app-produto-list',
   standalone: true,
-  imports: [CommonModule, RouterModule, TooltipModule],
+  imports: [CommonModule, RouterModule, TooltipModule, NgxPaginationModule],
   templateUrl: './produto-list.component.html',
   styleUrls: ['./produto-list.component.scss'],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
 })
 export class ProdutoListComponent implements OnInit {
+
+  pageActual: number = 1;
   produtos: IProduto[] = [];
   product: IProduto | undefined;
 
