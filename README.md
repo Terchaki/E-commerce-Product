@@ -1,59 +1,111 @@
-# EcommerceProduct
+# 🏆 E-commerce
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.10.
+<div style="background: #fff; text-align: center">
+  <img src="./public/images/logo-ecommerce.png" alt="Logo Meetime" width="200">
+</div>
 
-## Development server
+<br>
 
-To start a local development server, run:
+Esta é uma aplicação Angular responsiva em formato SPA (Single Page Application) que tem como objetivo apresentar um painel administrativo de e-commerce, onde o usuário pode criar, editar e excluir produtos.
+
+<br>
+
+## Demonstração da Aplicação
+
+<br>
+
+<div style="text-align: center">
+  <img src="./public/media/operating-system.gif" alt="Demonstração do Projeto" width="800">
+</div>
+
+<br><hr>
+
+
+<br>
+
+## 📄 Documentação Técnica
+
+Pensando na experiência do usuário e na eficiência do sistema, foram implementados os seguintes recursos:
+
+### 🚀 Experiência do Usuário
+
+- **Paginação de Produtos:** A listagem de produtos conta com paginação automática a partir de 6 itens, garantindo uma visualização mais organizada e evitando scroll.
+- **Filtro de Busca:** Componente de busca avançada, permitindo ao usuário filtrar produtos com base em critérios específicos.
+- **Geração de ID para Novo Produto:** Lógica implementada para geração automática e sequencial de identificadores ao cadastrar novos produtos.
+- **Modal de Confirmação de Exclusão:** Modal para confirmação de exclusão de produtos, prevenindo ações acidentais.
+- **Validação de Formulários:** Validações reativas nos formulários, assegurando o preenchimento correto dos campos obrigatórios.
+- **Mensagens de Feedback:** Sistema de mensagens visuais (toasts) que fornecem retorno imediato ao usuário após suas ações (sucesso, erro).
+
+### 🧩 Estrutura e Funcionamento da Aplicação
+
+- **Lazy Loading:** Carregamento sob demanda de componentes, melhorando a performance geral da aplicação.
+- **Reactive Forms:** Utilização de formulários reativos para melhor controle e validação dinâmica dos dados.
+- **Guarda de Rotas:** Proteção de rotas com autenticação, impedindo o acesso a telas restritas sem login.
+- **Separação de Responsabilidades:** Arquitetura organizada com clara separação entre componentes, serviços e módulos, facilitando a manutenção e escalabilidade do sistema.
+
+
+## 🛠️ Tecnologias Utilizadas
+
+* [Angular (v19)](https://angular.io/) - Framework para construção da interface de usuário.
+* [Ngx-Bootstrap](https://valor-software.com/ngx-bootstrap/) - Biblioteca de componentes do Angular.
+* [Bootstrap](https://getbootstrap.com/) - Biblioteca de estilos CSS para facilitar o layout e a responsividade.
+* [RxJS](https://rxjs.dev/) - Biblioteca para programação reativa com streams de dados.
+* [Ngx-Toastr](https://www.npmjs.com/package/ngx-toastr) - Biblioteca para exibir notificações e feedback visual ao usuário.
+* [Ngx-Pagination](https://www.npmjs.com/package/ngx-pagination) - Biblioteca para a criar a paginação usada na listagem de produtos.
+* [Uuid](https://www.npmjs.com/package/uuid) - Biblioteca usada para criar ids dinâmicos.
+
+## 📂 Estrutura de Pastas do Projeto
 
 ```bash
-ng serve
+├── public/            // Armazenamento de Arquivos.
+└── src/
+    └── app/
+        ├── auth/      // Login da aplicação.
+        ├── core/      // Guarda de rotas e serviço de Token.
+        ├── features/  // Funcionalidades desenvolvidas.
+        ├── layouts/   // Monta o layout da aplicação (SPA).
+        ├── shared/    // Componentes, Enums, Services e Interfaces de compartilhamento.
+        └── app.config.ts
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+## ⚙️ Como Executar o Projeto Localmente
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### ✅ Pré-requisitos
 
-```bash
-ng generate component component-name
-```
+* [Node.js](https://nodejs.org/) (versão LTS recomendada)
+* [Angular CLI](https://angular.io/cli) (Instalação global: `npm install -g @angular/cli`)
+* [Git](https://git-scm.com/)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### 👣 Passos para Execução
 
-```bash
-ng generate --help
-```
+1.  Clone o repositório:
+    ```bash
+    git clone https://github.com/Terchaki/E-commerce-Product.git
+    ```
+2.  Instale as dependências do projeto:
+    ```bash
+    npm install
+    ```
+3.  Inicie o servidor de desenvolvimento:
+    ```bash
+    ng serve -o
+    ```
+    Este comando irá construir a aplicação e abrir automaticamente no seu navegador em `http://localhost:4200`.
 
-## Building
 
-To build the project run:
+## ✨ Sugestões de Melhorias Futuras
 
-```bash
-ng build
-```
+* **Autenticação via Api:** Implementar autenticação via Api para gerar o Token Jwt e ResfreshToken.
+* **Inclusão de Interceptors:** Implementar interceptor para envio do Token Jwt nas requisições Http.
+* **Autenticação integrada:** Implementar autenticação integrada a acessos de outras plataformas com o usuário do Facebook.
+* **Exportação para PDF:** Adicionar a funcionalidade de gerar arquivo PDF contendo a listagem dos produtos como relatório em formato de tabela, utilizando bibliotecas front-end como `jsPDF` e `jspdf-autotable`, dispensando a necessidade de lógica no backend para esta funcionalidade.
+* **Inclusão Tela de Dashboards:** Implementar tela de gráficos para análise detalhadas dos produtos.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+<br>
 
-## Running unit tests
+## 🧑‍💻 Autor
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+* **Nome:** Lucas Henrique
+* **E-mail:** lucas.dev.contato@outlook.com
+* [LinkedIn](https://www.linkedin.com/in/lucas-henrique-sousa-mendes/)

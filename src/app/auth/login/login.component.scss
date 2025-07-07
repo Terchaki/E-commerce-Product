@@ -16,7 +16,7 @@
 
         .connect-facebook {
           position: relative;
-          background: #1877f2;
+          background: rgb(212, 210, 210);
           border-radius: 5px 0 0 5px;
           padding: 20px;
           display: flex;
@@ -42,8 +42,8 @@
           }
 
           p {
-            color: #FFF;
-            font-weight: 500;
+            color: rgb(98, 97, 97);
+            font-weight: 600;
             font-size: 1rem;
             margin: 0;
           }
@@ -51,7 +51,7 @@
 
         .form-login {
           position: relative;
-          background: #d7c7c7;
+          background: rgb(212, 210, 210);
           margin-left: 12px;
           border-radius: 0 5px 5px 0;
           padding: 0px 25px 20px 25px;

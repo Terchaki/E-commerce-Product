@@ -34,6 +34,7 @@
               formControlName="username"
               name="username"
               class="form-control"
+              autocomplete="off"
               placeholder="Digite seu nome de usuário"
               [ngClass]="{
                 'is-invalid': submittedForm && form.get('username')?.invalid
@@ -86,6 +87,7 @@
           </div>
           <p class="forgot-password">
             <a [routerLink]="['/']">Esqueceu a senha?</a>
+            <a [routerLink]="['/']" class="ps-3">Cadastro</a>
           </p>
           <div class="container-btn">
             <button type="submit" class="btn-submit">Iniciar sessão</button>
