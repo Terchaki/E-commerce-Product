@@ -15,7 +15,7 @@ Esta é uma aplicação Angular responsiva em formato SPA (Single Page Applicati
 <br>
 
 <div style="text-align: center">
-  <img src="./public/media/operating-system.gif" alt="Demonstração do Projeto" width="800">
+  <img src="./public/media/operatingSystem.gif" alt="Demonstração do Projeto" width="800">
 </div>
 
 <br><hr>
