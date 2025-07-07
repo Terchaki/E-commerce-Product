@@ -23,6 +23,20 @@ Esta é uma aplicação Angular responsiva em formato SPA (Single Page Applicati
 
 <br>
 
+
+## 📄 Instruções para Login
+
+A autenticação **mockada** , gerando um token fictício com base nos dados inseridos no formulário de login.
+
+### 🧪 Dados para Acesso
+
+1. **Usuário:** Pode ser qualquer nome por exemplo, seu próprio nome.
+2. **Senha:** Aceita qualquer valor, desde que **não esteja vazia**.
+
+> Observação: Como a autenticação é apenas simulada, não há validação real com uma Api. O objetivo é apenas permitir a navegação na aplicação como se o login fosse válido e gerar um token para o guarda de rotas. 
+
+<br>
+
 ## 📄 Documentação Técnica
 
 Pensando na experiência do usuário e na eficiência do sistema, foram implementados os seguintes recursos:
@@ -93,8 +107,21 @@ Pensando na experiência do usuário e na eficiência do sistema, foram implemen
     ```
     Este comando irá construir a aplicação e abrir automaticamente no seu navegador em `http://localhost:4200`.
 
+    <br>
+## ⚙️ Testes
 
-## ✨ Sugestões de Melhorias Futuras
+### 👣 Passos para Execução
+
+1.  Abrir um novo terminal na raiz do projeto:
+2.  Execute o seguinte comando:
+    ```bash
+    ng test
+    ```
+Este comando irá abrir automaticamente no seu navegador.
+
+<br><br>
+
+## ✨ Sugestões de Melhorias 
 
 * **Autenticação via Api:** Implementar autenticação via Api para gerar o Token Jwt e ResfreshToken.
 * **Inclusão de Interceptors:** Implementar interceptor para envio do Token Jwt nas requisições Http.
