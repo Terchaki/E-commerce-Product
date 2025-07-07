@@ -1,7 +1,9 @@
 # 🏆 E-commerce
 
+# ✅  Front-end
+
 <div style="background: #fff; text-align: center">
-  <img src="./public/images/logo-ecommerce.png" alt="Logo Meetime" width="200">
+  <img src="WebClient/public/images/logo-ecommerce.png" alt="Logo Meetime" width="200">
 </div>
 
 <br>
@@ -15,7 +17,7 @@ Esta é uma aplicação Angular responsiva em formato SPA (Single Page Applicati
 <br>
 
 <div style="text-align: center">
-  <img src="./public/media/operating-system.gif" alt="Demonstração do Projeto" width="800">
+  <img src="WebClient/public/media/operating-system.gif" alt="Demonstração do Projeto" width="800">
 </div>
 
 <br><hr>
@@ -96,12 +98,18 @@ Pensando na experiência do usuário e na eficiência do sistema, foram implemen
 1.  Clone o repositório:
     ```bash
     git clone https://github.com/Terchaki/E-commerce-Product.git
+2.  Acesse a pasta 'E-commerce-Product':
+    ```bash
+    cd E-commerce-Product
+3.  Acesse a pasta 'WebClient':
+    ```bash
+    cd WebClient
     ```
-2.  Instale as dependências do projeto:
+4.  Instale as dependências do projeto:
     ```bash
     npm install
     ```
-3.  Inicie o servidor de desenvolvimento:
+5.  Inicie o servidor de desenvolvimento:
     ```bash
     ng serve -o
     ```
@@ -129,7 +137,116 @@ Este comando irá abrir automaticamente no seu navegador.
 * **Exportação para PDF:** Adicionar a funcionalidade de gerar arquivo PDF contendo a listagem dos produtos como relatório em formato de tabela, utilizando bibliotecas front-end como `jsPDF` e `jspdf-autotable`, dispensando a necessidade de lógica no backend para esta funcionalidade.
 * **Inclusão Tela de Dashboards:** Implementar tela de gráficos para análise detalhadas dos produtos.
 
+
 <br>
+<br>
+
+# ✅  Back-end
+
+# Backend - Produto API
+
+API RESTful com .NET 6, MySQL e Dapper para gerenciamento de produtos.
+
+## Tecnologias
+
+- .NET 6
+- Dapper
+- MySQL
+
+## 📂 Estrutura de Pastas do Projeto
+
+```bash
+src/
+├── Controllers/
+├── Models/
+│   └── Produto.cs
+│   └── Departamento.cs
+├── Properties/
+├── Repositories/
+│   └── ProdutoRepository.cs
+│   └── IDbConnectionFactory.cs
+├── Program.cs
+├── appsettings.json
+└── ...
+```
+
+
+## ⚙️ Como Configurar o Projeto
+
+### Pré-requisitos
+
+Antes de iniciar, certifique-se de que você tem instalado:
+
+- [.NET SDK 6.0+](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)
+- [MySQL Server](https://dev.mysql.com/downloads/)
+
+## Configuração
+
+1. Configure seu banco MySQL e execute os scripts SQL:
+
+```sql
+CREATE DATABASE produtos_db;
+
+USE produtos_db;
+
+CREATE TABLE departamentos (
+  codigo VARCHAR(3) PRIMARY KEY,
+  descricao TEXT NOT NULL
+);
+
+INSERT INTO departamentos (codigo, descricao) VALUES
+('010', 'BEBIDAS'),
+('020', 'CONGELADOS'),
+('030', 'LATICINIOS'),
+('040', 'VEGETAIS');
+
+CREATE TABLE produtos (
+  id CHAR(36) PRIMARY KEY,
+  codigo TEXT NOT NULL,
+  descricao TEXT NOT NULL,
+  departamento_codigo VARCHAR(3),
+  preco DECIMAL(10,2) NOT NULL,
+  status BOOLEAN NOT NULL,
+  excluido BOOLEAN NOT NULL DEFAULT FALSE,
+  FOREIGN KEY (departamento_codigo) REFERENCES departamentos(codigo)
+);
+```
+
+2. Ajuste a connection string no `appsettings.json`.
+```
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost;Database=produtos_db;User Id=root;Password=suasenha;"
+  }
+}
+```
+
+3. Instalar as Dependências
+
+Na pasta src da Api abra o terminal e execute o seguinte comando:
+```bash
+dotnet restore
+```
+
+4. Execute a API:
+
+```bash
+dotnet run
+```
+
+<br>
+
+A API estará disponível em `http://localhost:5000/swagger`.
+
+## Lista de Endpoints
+| Método | Rota               | Descrição                       |
+| ------ | ------------------ | ------------------------------- |
+| GET    | /api/produtos      | Lista todos os produtos         |
+| GET    | /api/produtos/{id} | Busca um produto por ID         |
+| POST   | /api/produtos      | Cadastra um novo produto        |
+| PUT    | /api/produtos/{id} | Atualiza os dados de um produto |
+| DELETE | /api/produtos/{id} | Remove um produto (soft delete) |
+
 
 ## 🧑‍💻 Autor
 
