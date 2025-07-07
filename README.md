@@ -1,5 +1,3 @@
-# E-commerce-Product
-
 # 🏆 E-commerce
 
 <div style="background: #fff; text-align: center">
