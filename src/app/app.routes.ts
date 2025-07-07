@@ -47,10 +47,10 @@ export const appRoutes: Routes = [
       },
     ],
   },
-  /** Rota Coringa */
+  /** wildcard route */
   {
     path: '**',
-    redirectTo: 'auth',
+    redirectTo: '/cadastro',
     pathMatch: 'full',
   },
 ];

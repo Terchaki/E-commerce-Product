@@ -17,7 +17,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 // Interfaces
-import { IProduto } from '../../models/produto.model';
+import { IProduct } from '../../models/produto.model';
 import { ISerarchFilds } from '../../models/field-search-filters.model';
 
 // Pt-Br
@@ -41,10 +41,10 @@ registerLocaleData(localePt);
 export class ProdutoListComponent implements OnInit {
   pageActual: number = 1;
   itemsPerPage: number = 5;
-  products: IProduto[] = [];
-  productsAll: IProduto[] = [];
-  productsFull: IProduto[] = [];
-  product: IProduto | undefined;
+  products: IProduct[] = [];
+  productsAll: IProduct[] = [];
+  productsFull: IProduct[] = [];
+  product: IProduct | undefined;
 
   modalRef?: BsModalRef;
   configSm = {
@@ -66,7 +66,7 @@ export class ProdutoListComponent implements OnInit {
    * Getting list of products.
    */
   getProducts() {
-    this.service.getProdutos().subscribe((p) => {
+    this.service.getProductsList().subscribe((p) => {
       this.products = p;
       this.productsFull = p;
 
@@ -136,7 +136,7 @@ export class ProdutoListComponent implements OnInit {
     this.products = this.productsAll;
   }
 
-  modalExcludedProduct(template: TemplateRef<any>, prod: IProduto): void {
+  modalExcludedProduct(template: TemplateRef<any>, prod: IProduct): void {
     this.modalRef = this.modalService.show(template, this.configSm);
     this.product = prod;
   }

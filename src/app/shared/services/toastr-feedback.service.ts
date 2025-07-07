@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 // Toastr
 import { GlobalConfig, ToastrService } from 'ngx-toastr';
+
+// RXJS
 import { timer } from 'rxjs';
 
 @Injectable({

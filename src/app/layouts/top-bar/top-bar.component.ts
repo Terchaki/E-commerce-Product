@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+// NGX-Bootstrap
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 @Component({

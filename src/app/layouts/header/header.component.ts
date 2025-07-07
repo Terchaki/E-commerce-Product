@@ -1,7 +1,13 @@
-import { SecurityUtil } from './../../core/utils/security.util';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+// Token
+import { SecurityUtil } from './../../core/utils/security.util';
+
+// Services
 import { AuthService } from '../../auth/services/auth.service';
+
+// Interfaces
 import { ILogin } from '../../auth/models/login.model';
 
 @Component({
@@ -18,12 +24,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.user = SecurityUtil.getAccount();
     this.initialName();
-    localStorage.removeItem('debug');
-  }
 
-  logout() {
-    SecurityUtil.clear();
-    this.authService.logout();
+    // removing item from local storage (possibly included in some angular library).
+    localStorage.removeItem('debug');
   }
 
   nameUser(): string | undefined {
@@ -51,5 +54,10 @@ export class HeaderComponent implements OnInit {
     }`;
 
     return initials?.toUpperCase();
+  }
+
+  logout() {
+    SecurityUtil.clear();
+    this.authService.logout();
   }
 }

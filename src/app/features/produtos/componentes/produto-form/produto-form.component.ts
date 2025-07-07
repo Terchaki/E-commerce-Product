@@ -10,7 +10,7 @@ import {
 } from '@angular/forms';
 
 // Interfaces
-import { IProduto, IDepartamento } from '../../models/produto.model';
+import { IProduct, IDepartment } from '../../models/produto.model';
 
 // Componentes
 import { ProdutoService } from '../../services/produto.service';
@@ -28,8 +28,8 @@ import { v4 as uuidv4 } from 'uuid';
 export class ProdutoFormComponent implements OnInit {
   form: FormGroup;
   submittedForm = false;
-  product!: IProduto;
-  department: IDepartamento[] = [];
+  product!: IProduct;
+  department: IDepartment[] = [];
   newProduct: string | null;
 
   constructor(
@@ -101,7 +101,7 @@ export class ProdutoFormComponent implements OnInit {
   getProduts() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.produtoService.getProduto(id).subscribe((p) => {
+      this.produtoService.getProduct(id).subscribe((p) => {
         this.product = p;
         this.f['codigo'].setValue(p.codigo);
         this.f['descricao'].setValue(p.descricao);
@@ -121,7 +121,7 @@ export class ProdutoFormComponent implements OnInit {
     if (this.form.invalid) {
       return;
     } else {
-      let envReq: IProduto = {
+      let envReq: IProduct = {
         id: this.product?.id ? this.product?.id : uuidv4(),
         codigo: this.f['codigo'].value,
         descricao: this.f['descricao'].value,

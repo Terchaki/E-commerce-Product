@@ -1,23 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { TestBed } from '@angular/core/testing';
 import { SearchFilterComponent } from './search-filter.component';
 
 describe('SearchFilterComponent', () => {
-  let component: SearchFilterComponent;
-  let fixture: ComponentFixture<SearchFilterComponent>;
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SearchFilterComponent]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(SearchFilterComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      imports: [
+        SearchFilterComponent,
+        HttpClientTestingModule,
+        ToastrModule.forRoot(),
+      ],
+    }).compileComponents();
   });
 
   it('should create', () => {
+    const fixture = TestBed.createComponent(SearchFilterComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
 });

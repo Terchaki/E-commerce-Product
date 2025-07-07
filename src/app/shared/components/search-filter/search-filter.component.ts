@@ -1,4 +1,3 @@
-import { ISerarchFilds } from './../../../features/produtos/models/field-search-filters.model';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   FormGroup,
@@ -6,7 +5,12 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { IDepartamento } from '../../../features/produtos/models/produto.model';
+
+// Interfaces
+import { IDepartment } from '../../../features/produtos/models/produto.model';
+import { ISerarchFilds } from './../../../features/produtos/models/field-search-filters.model';
+
+// Services
 import { ProdutoService } from '../../../features/produtos/services/produto.service';
 
 @Component({
@@ -18,14 +22,14 @@ import { ProdutoService } from '../../../features/produtos/services/produto.serv
 export class SearchFilterComponent implements OnInit {
   @Output() itemsFilters = new EventEmitter<ISerarchFilds>();
   form: FormGroup;
-  departamentos: IDepartamento[] = [];
+  departamentos: IDepartment[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private produtoService: ProdutoService
   ) {
     /**
-     * Inicializando form.
+     * Init form.
      */
     this.form = this.formBuilder.group(this.validatorsForm());
   }
@@ -41,11 +45,11 @@ export class SearchFilterComponent implements OnInit {
     return this.form.controls;
   }
 
+  /**
+   * Validators form.
+   */
   validatorsForm() {
     return {
-      /**
-       * Validadores do form:
-       */
       codigo: [''],
       descricao: [''],
       departamento: [''],
@@ -59,6 +63,9 @@ export class SearchFilterComponent implements OnInit {
       .subscribe((dep) => (this.departamentos = dep));
   }
 
+  /**
+   * Clearing form fields and notifying parent component.
+   */
   clearFields() {
     this.form.reset();
     this.f['status'].setValue('');
@@ -72,6 +79,9 @@ export class SearchFilterComponent implements OnInit {
     this.itemsFilters.emit(envReq);
   }
 
+  /**
+   * Sending the search of the applied filter to the parent component.
+   */
   env() {
     let envReq: ISerarchFilds = {
       codigo: this.f['codigo'].value,

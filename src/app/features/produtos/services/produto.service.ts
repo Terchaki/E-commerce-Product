@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IProduto, IDepartamento } from '../models/produto.model';
+
+// Services
+import { IProduct, IDepartment } from '../models/produto.model';
+
+// RXJS
 import { catchError, Observable, tap, throwError } from 'rxjs';
+
+// Services
 import { ToastrFeedbackService } from '../../../shared/services/toastr-feedback.service';
 
 @Injectable({ providedIn: 'root' })
@@ -13,8 +19,8 @@ export class ProdutoService {
     private toastrFeedbackService: ToastrFeedbackService
   ) {}
 
-  getProdutos(): Observable<IProduto[]> {
-    return this.http.get<IProduto[]>(`${this.apiUrl}/Produto`).pipe(
+  getProductsList(): Observable<IProduct[]> {
+    return this.http.get<IProduct[]>(`${this.apiUrl}/Produto`).pipe(
       catchError((error) => {
         this.toastrFeedbackService.toast(
           'Falha ao tentar carregar os produtos, tente novamente!',
@@ -26,8 +32,8 @@ export class ProdutoService {
     );
   }
 
-  getProduto(id: string): Observable<IProduto> {
-    return this.http.get<IProduto>(`${this.apiUrl}/Produto/${id}`).pipe(
+  getProduct(id: string): Observable<IProduct> {
+    return this.http.get<IProduct>(`${this.apiUrl}/Produto/${id}`).pipe(
       catchError((error) => {
         this.toastrFeedbackService.toast(
           'Falha ao tentar carregar produto, tente novamente!',
@@ -39,7 +45,7 @@ export class ProdutoService {
     );
   }
 
-  create(produto: IProduto): Observable<void> {
+  create(produto: IProduct): Observable<void> {
     return this.http.post<void>(`${this.apiUrl}/Produto`, produto).pipe(
       tap(() => {
         this.toastrFeedbackService.toast(
@@ -59,7 +65,7 @@ export class ProdutoService {
     );
   }
 
-  update(produto: IProduto): Observable<void> {
+  update(produto: IProduct): Observable<void> {
     return this.http
       .put<void>(`${this.apiUrl}/Produto/${produto.id}`, produto)
       .pipe(
@@ -101,8 +107,8 @@ export class ProdutoService {
     );
   }
 
-  getDepartaments(): Observable<IDepartamento[]> {
-    return this.http.get<IDepartamento[]>(`${this.apiUrl}/Departamento`).pipe(
+  getDepartaments(): Observable<IDepartment[]> {
+    return this.http.get<IDepartment[]>(`${this.apiUrl}/Departamento`).pipe(
       catchError((error) => {
         this.toastrFeedbackService.toast(
           'Falha ao tentar carregar os departamentos, tente novamente!',
