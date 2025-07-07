@@ -1,0 +1,23 @@
+:host {
+  .label-filter {
+    color: #3a6699;
+    font-size: 1.12rem;
+    font-weight: 700;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 0px;
+    color: #052e62;
+  }
+
+  input,
+  select {
+    height: 35px;
+
+    &::placeholder {
+      color: #d3d3d3;
+    }
+  }
+
+}

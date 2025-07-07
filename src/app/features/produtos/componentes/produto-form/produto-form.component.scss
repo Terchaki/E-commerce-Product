@@ -1,0 +1,27 @@
+:host {
+
+  .separator {
+    height: 85px;
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0px;
+      color: #052e62;
+    }
+
+    input, select {
+      height: 35px;
+
+      &::placeholder {
+        color: #d3d3d3;
+      }
+    }
+
+    .font-size-12 {
+      font-size: 0.75rem;
+    }
+
+  }
+
+
+}
