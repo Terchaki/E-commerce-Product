@@ -1,6 +1,5 @@
-<<<<<<< HEAD
 # E-commerce-Product
-=======
+
 # 🏆 E-commerce
 
 <div style="background: #fff; text-align: center">
@@ -139,4 +138,3 @@ Este comando irá abrir automaticamente no seu navegador.
 * **Nome:** Lucas Henrique
 * **E-mail:** lucas.dev.contato@outlook.com
 * [LinkedIn](https://www.linkedin.com/in/lucas-henrique-sousa-mendes/)
->>>>>>> 7d8fb34 (organized branch)
